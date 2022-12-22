@@ -8,6 +8,7 @@ class Playwright < Formula
   license "Apache-2.0"
 
   livecheck do
+    strategy :npm
     url :stable
   end
 

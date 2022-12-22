@@ -8,13 +8,14 @@ class Do < Formula
   license "MIT"
 
   livecheck do
-    url :stable
     strategy :pypi
+    url :stable
   end
 
   option "with-playwright"
 
   depends_on "python@3.9"
+  depends_on "numpy"
 
   if build.with?("playwright")
     depends_on "node"
@@ -64,11 +65,6 @@ class Do < Formula
   resource "idna" do
     url "https://files.pythonhosted.org/packages/8b/e1/43beb3d38dba6cb420cefa297822eac205a277ab43e5ba5d5c46faf96438/idna-3.4.tar.gz"
     sha256 "814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4"
-  end
-
-  resource "numpy" do
-    url "https://files.pythonhosted.org/packages/5f/c7/5ca7c100dcc85b5ef1b176bdf87be5e4392c2c3018e13cc7cdef828c6a09/numpy-1.24.0.tar.gz"
-    sha256 "c4ab7c9711fe6b235e86487ca74c1b092a6dd59a3cb45b63241ea0a148501853"
   end
 
   resource "openai" do
@@ -156,8 +152,10 @@ class Do < Formula
     sha256 "c083dd0dce68dbfbe1129d5271cb90f9447dea7d52097c6e0126120c521ddea8"
   end
 
+
   def install
     venv = virtualenv_create(libexec, "python3.9")
+    venv.pip_install "-U", "pip", "setuptools", "wheel"
     venv.pip_install resources.filter { |r| r.url.include? "pythonhosted" }
     venv.pip_install_and_link buildpath
   end
