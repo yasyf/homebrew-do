@@ -1,4 +1,4 @@
-class GptDo < Formula
+class Do < Formula
   include Language::Python::Virtualenv
 
   desc "GPT-powered bash commands."
