@@ -3,10 +3,24 @@ class Do < Formula
 
   desc "GPT-powered bash commands."
   homepage "https://github.com/yasyf/gpt-do"
+  license "MIT"
   url "https://files.pythonhosted.org/packages/a6/ca/374beafa5c9e8cd329d1b3f0afa02f1ba23a149ade4c046950937bb79e72/gpt_do-0.1.13.tar.gz"
   sha256 "c2e77d409bf1e5f40f45a4c7951214346590f13f9fdcba3b35fe9d72a463fd01"
 
+  livecheck do
+    url :stable
+    strategy :pypi
+  end
+
+  option "with-playwright"
+
   depends_on "python@3.9"
+
+  if build.with?("playwright")
+    depends_on "node"
+    depends_on "yasyf/do/playwright"
+  end
+
 
   resource "certifi" do
     url "https://files.pythonhosted.org/packages/37/f7/2b1b0ec44fdc30a3d31dfebe52226be9ddc40cd6c0f34ffc8923ba423b69/certifi-2022.12.7.tar.gz"
@@ -78,11 +92,6 @@ class Do < Formula
     sha256 "0cbc1dbdf5dddb4d67ebc851b9cfb265bf62fe317b043bd37ee5a4a2659421f2"
   end
 
-  resource "playwright" do
-    url "https://files.pythonhosted.org/packages/94/e0/55d941f524612cf1923368163ffa786be5f1a0f90d89b02f7fa35e3af3b6/playwright-1.29.0-py3-none-macosx_11_0_universal2.whl"
-    sha256 "84ae9f999d57463d6450fd4fb3e9e70695fb2b87c4ca76f4459f054ab6fa6583"
-  end
-
   resource "py" do
     url "https://files.pythonhosted.org/packages/98/ff/fec109ceb715d2a6b4c4a85a61af3b40c723a961e8828319fbcb15b868dc/py-1.11.0.tar.gz"
     sha256 "51c75c4126074b472f746a24399ad32f6053d1b34b68d2fa41e558e6f4a98719"
@@ -149,8 +158,9 @@ class Do < Formula
   end
 
   def install
-    virtualenv_create(libexec, "python3.9")
-    virtualenv_install_with_resources
+    venv = virtualenv_create(libexec, "python3.9")
+    venv.pip_install resources.filter {|r| r.url.include? "pythonhosted" }
+    venv.pip_install_and_link buildpath
   end
 
   test do
