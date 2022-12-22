@@ -20,6 +20,6 @@ class Playwright < Formula
   end
 
   test do
-    assert_match "1.29.1", shell_output("#{bin}/playwright -V") 
+    assert_match "1.29.1", shell_output("#{bin}/playwright -V")
   end
 end
