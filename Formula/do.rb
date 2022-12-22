@@ -14,7 +14,6 @@ class Do < Formula
 
   option "with-playwright"
 
-  depends_on "numpy"
   depends_on "python@3.9"
 
   if build.with?("playwright")
@@ -65,6 +64,11 @@ class Do < Formula
   resource "idna" do
     url "https://files.pythonhosted.org/packages/8b/e1/43beb3d38dba6cb420cefa297822eac205a277ab43e5ba5d5c46faf96438/idna-3.4.tar.gz"
     sha256 "814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4"
+  end
+
+  resource "numpy" do
+    url "https://files.pythonhosted.org/packages/5f/c7/5ca7c100dcc85b5ef1b176bdf87be5e4392c2c3018e13cc7cdef828c6a09/numpy-1.24.0.tar.gz"
+    sha256 "c4ab7c9711fe6b235e86487ca74c1b092a6dd59a3cb45b63241ea0a148501853"
   end
 
   resource "openai" do
@@ -152,14 +156,22 @@ class Do < Formula
     sha256 "c083dd0dce68dbfbe1129d5271cb90f9447dea7d52097c6e0126120c521ddea8"
   end
 
-  resource "packaging" do
-    url "https://files.pythonhosted.org/packages/6b/f7/c240d7654ddd2d2f3f328d8468d4f1f876865f6b9038b146bec0a6737c65/packaging-22.0.tar.gz"
-    sha256 "2198ec20bd4c017b8f9717e00f0c8714076fc2fd93816750ab48e2c41de2cfd3"
+
+  on_macos do
+    resource "packaging" do
+      url "https://files.pythonhosted.org/packages/6b/f7/c240d7654ddd2d2f3f328d8468d4f1f876865f6b9038b146bec0a6737c65/packaging-22.0.tar.gz?first"
+      sha256 "2198ec20bd4c017b8f9717e00f0c8714076fc2fd93816750ab48e2c41de2cfd3"
+    end
+
+    resource "wheel" do
+      url "https://files.pythonhosted.org/packages/a2/b8/6a06ff0f13a00fc3c3e7d222a995526cbca26c1ad107691b6b1badbbabf1/wheel-0.38.4.tar.gz?first"
+      sha256 "965f5259b566725405b05e7cf774052044b1ed30119b5d586b2703aafe8719ac"
+    end
   end
 
   def install
     venv = virtualenv_create(libexec, "python3.9")
-    venv.pip_install resources.find { |r| r.name == "packaging" }
+    venv.pip_install resources.filter { |r| r.url.include? == "first" }
     venv.pip_install resources.filter { |r| r.url.include? "pythonhosted" }
     venv.pip_install_and_link buildpath
   end
