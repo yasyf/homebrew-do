@@ -3,8 +3,8 @@ class Do < Formula
 
   desc "GPT3-powered bash commands"
   homepage "https://github.com/yasyf/gpt-do"
-  url "https://files.pythonhosted.org/packages/a6/ca/374beafa5c9e8cd329d1b3f0afa02f1ba23a149ade4c046950937bb79e72/gpt_do-0.1.13.tar.gz"
-  sha256 "c2e77d409bf1e5f40f45a4c7951214346590f13f9fdcba3b35fe9d72a463fd01"
+  url "https://files.pythonhosted.org/packages/ce/2c/f1ad114d524af544ff1571b368e5d42c4430eb213521c88c2dcf1ab96ec7/gpt_do-0.1.14.tar.gz"
+  sha256 "9cefe8b2b8b92cdb29869e393cb58e404206957c09e95e20d99cf840972744d9"
   license "MIT"
 
   livecheck do
@@ -14,8 +14,8 @@ class Do < Formula
 
   option "with-playwright"
 
-  depends_on "python@3.9"
   depends_on "numpy"
+  depends_on "python@3.9"
 
   if build.with?("playwright")
     depends_on "node"
@@ -156,7 +156,6 @@ class Do < Formula
     url "https://files.pythonhosted.org/packages/a2/b8/6a06ff0f13a00fc3c3e7d222a995526cbca26c1ad107691b6b1badbbabf1/wheel-0.38.4.tar.gz"
     sha256 "965f5259b566725405b05e7cf774052044b1ed30119b5d586b2703aafe8719ac"
   end
-
 
   def install
     venv = virtualenv_create(libexec, "python3.9")
