@@ -152,10 +152,14 @@ class Do < Formula
     sha256 "c083dd0dce68dbfbe1129d5271cb90f9447dea7d52097c6e0126120c521ddea8"
   end
 
+  resource "wheel" do
+    url "https://files.pythonhosted.org/packages/a2/b8/6a06ff0f13a00fc3c3e7d222a995526cbca26c1ad107691b6b1badbbabf1/wheel-0.38.4.tar.gz"
+    sha256 "965f5259b566725405b05e7cf774052044b1ed30119b5d586b2703aafe8719ac"
+  end
+
 
   def install
     venv = virtualenv_create(libexec, "python3.9")
-    venv.pip_install "-U", "pip", "setuptools", "wheel"
     venv.pip_install resources.filter { |r| r.url.include? "pythonhosted" }
     venv.pip_install_and_link buildpath
   end
