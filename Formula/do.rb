@@ -169,6 +169,15 @@ class Do < Formula
     end
   end
 
+  def caveats
+    <<~EOS
+      If you're using `bash` or `zsh`, `do` is a reserved keyword.
+      We've aliased `ddo` to `do` for your convenience.
+
+      Usage: `ddo revert my last commit`
+    EOS
+  end
+
   def install
     venv = virtualenv_create(libexec, "python3.9")
     venv.pip_install resources.filter { |r| r.url.include? == "first" }
