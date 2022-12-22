@@ -1,11 +1,11 @@
 class Do < Formula
   include Language::Python::Virtualenv
 
-  desc "GPT-powered bash commands."
+  desc "GPT3-powered bash commands"
   homepage "https://github.com/yasyf/gpt-do"
-  license "MIT"
   url "https://files.pythonhosted.org/packages/a6/ca/374beafa5c9e8cd329d1b3f0afa02f1ba23a149ade4c046950937bb79e72/gpt_do-0.1.13.tar.gz"
   sha256 "c2e77d409bf1e5f40f45a4c7951214346590f13f9fdcba3b35fe9d72a463fd01"
+  license "MIT"
 
   livecheck do
     url :stable
@@ -20,7 +20,6 @@ class Do < Formula
     depends_on "node"
     depends_on "yasyf/do/playwright"
   end
-
 
   resource "certifi" do
     url "https://files.pythonhosted.org/packages/37/f7/2b1b0ec44fdc30a3d31dfebe52226be9ddc40cd6c0f34ffc8923ba423b69/certifi-2022.12.7.tar.gz"
@@ -159,7 +158,7 @@ class Do < Formula
 
   def install
     venv = virtualenv_create(libexec, "python3.9")
-    venv.pip_install resources.filter {|r| r.url.include? "pythonhosted" }
+    venv.pip_install resources.filter { |r| r.url.include? "pythonhosted" }
     venv.pip_install_and_link buildpath
   end
 

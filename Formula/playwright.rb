@@ -1,7 +1,7 @@
 require "language/node"
 
 class Playwright < Formula
-  desc "A high-level API to automate web browsers"
+  desc "High-level API to automate web browsers"
   homepage "https://playwright.dev"
   url "https://registry.npmjs.org/playwright/-/playwright-1.29.1.tgz"
   sha256 "db072864b9d7722c617c74410f56e57fbdaeb010dd8023e84a3e4a75cf7d07db"
