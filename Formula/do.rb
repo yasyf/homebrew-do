@@ -157,6 +157,10 @@ class Do < Formula
   end
 
   def install
+    ENV["BLAS"] = "None"
+    ENV["LAPACK"] = "None"
+    ENV["ATLAS"] = "None"
+
     venv = virtualenv_create(libexec, "python3.10")
     root = venv.instance_variable_get(:@venv_root)
     system "python3.10", "-m", "venv", "--upgrade", "--upgrade-deps", root
@@ -176,7 +180,7 @@ class Do < Formula
   end
 
   test do
-    assert_match "REQUEST", shell_output("#{bin}/do")
-    assert_match "REQUEST", shell_output("#{bin}/ddo")
+    assert_match "REQUEST", shell_output("#{bin}/do", 2)
+    assert_match "REQUEST", shell_output("#{bin}/ddo", 2)
   end
 end
