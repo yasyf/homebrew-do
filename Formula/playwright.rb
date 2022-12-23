@@ -10,8 +10,9 @@ class Playwright < Formula
   bottle do
     root_url "https://github.com/yasyf/homebrew-do/releases/download/playwright-1.29.1"
     rebuild 1
-    sha256 cellar: :any_skip_relocation, monterey:     "4b9b8d41fbd2b9b55f8f20b521f26e1926ab4a732decb0b7dcafe5f4a2f2562c"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "c0f79622e46f3b0309bd166b0e7ceb0a86a2b9288aaab302ba93132d4ae8fa84"
+    sha256 cellar: :any_skip_relocation, arm64_ventura: "3beb5225aee8af9874a756b04150bac3e4c2ca19ed51b90593bf8eba7fd40804"
+    sha256 cellar: :any_skip_relocation, monterey:      "4b9b8d41fbd2b9b55f8f20b521f26e1926ab4a732decb0b7dcafe5f4a2f2562c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c0f79622e46f3b0309bd166b0e7ceb0a86a2b9288aaab302ba93132d4ae8fa84"
   end
 
   depends_on "node"
