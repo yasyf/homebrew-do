@@ -180,7 +180,7 @@ class Do < Formula
   end
 
   test do
-    assert_match "REQUEST", shell_output("#{bin}/do", 2)
-    assert_match "REQUEST", shell_output("#{bin}/ddo", 2)
+    shell_output("#{bin}/do", 2)
+    shell_output("#{bin}/ddo", 2)
   end
 end
