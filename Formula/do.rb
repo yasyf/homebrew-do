@@ -157,10 +157,11 @@ class Do < Formula
   end
 
   def install
-    system Formula["python@3.9"].opt_bin/"pip3", "install", "-U", "pip", "virtualenv", "wheel", "packaging"
-    system Formula["python@3.9"].opt_bin/"python3", "-m", "venv", "--upgrade-embed-wheels"
+    system Formula["python@3.9"].opt_bin/"pip3.9", "install", "-U", "pip", "virtualenv", "wheel", "packaging"
 
     venv = virtualenv_create(libexec, "python3.9")
+    system venv.instance_variable_get(:@venv_root)/"bin"/"virtualenv", "--upgrade-embed-wheel"
+
     venv.pip_install resources.filter { |r| r.url.include? "pythonhosted" }
     venv.pip_install_and_link buildpath
   end
