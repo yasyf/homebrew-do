@@ -1,7 +1,7 @@
 class Do < Formula
   include Language::Python::Virtualenv
 
-  desc "GPT3-powered bash commands"
+  desc "AI-Powered Shell (GPT3)"
   homepage "https://github.com/yasyf/gpt-do"
   url "https://files.pythonhosted.org/packages/ce/2c/f1ad114d524af544ff1571b368e5d42c4430eb213521c88c2dcf1ab96ec7/gpt_do-0.1.14.tar.gz"
   sha256 "9cefe8b2b8b92cdb29869e393cb58e404206957c09e95e20d99cf840972744d9"
