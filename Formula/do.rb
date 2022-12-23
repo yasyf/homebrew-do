@@ -14,7 +14,7 @@ class Do < Formula
 
   option "with-playwright"
 
-  depends_on "python@3.9"
+  depends_on "python@3.10"
 
   if build.with?("playwright")
     depends_on "node"
@@ -157,9 +157,9 @@ class Do < Formula
   end
 
   def install
-    venv = virtualenv_create(libexec, "python3.9")
+    venv = virtualenv_create(libexec, "python3.10")
     root = venv.instance_variable_get(:@venv_root)
-    system "python3.9", "-m", "venv", "--upgrade", "--upgrade-deps", root
+    system "python3.10", "-m", "venv", "--upgrade", "--upgrade-deps", root
     system root/"bin"/"pip", "install", "-U", "wheel", "packaging"
 
     venv.pip_install resources.filter { |r| r.url.include? "pythonhosted" }

@@ -6,7 +6,7 @@ on:
   pull_request:
 env:
   SYSTEM_VERSION_COMPAT: 1
-  NPY_BLAS_ORDER>: ""
+  NPY_BLAS_ORDER: ""
   NPY_LAPACK_ORDER: ""
   BLAS: None
   LAPACK: None
