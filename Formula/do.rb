@@ -1,12 +1,20 @@
 class Do < Formula
   include Language::Python::Virtualenv
 
-  desc "GPT-powered bash commands."
+  desc "GPT3-powered bash commands"
   homepage "https://github.com/yasyf/gpt-do"
-  url "https://files.pythonhosted.org/packages/a6/ca/374beafa5c9e8cd329d1b3f0afa02f1ba23a149ade4c046950937bb79e72/gpt_do-0.1.13.tar.gz"
-  sha256 "c2e77d409bf1e5f40f45a4c7951214346590f13f9fdcba3b35fe9d72a463fd01"
+  url "https://files.pythonhosted.org/packages/ce/2c/f1ad114d524af544ff1571b368e5d42c4430eb213521c88c2dcf1ab96ec7/gpt_do-0.1.14.tar.gz"
+  sha256 "9cefe8b2b8b92cdb29869e393cb58e404206957c09e95e20d99cf840972744d9"
+  license "MIT"
 
-  depends_on "python@3.9"
+  option "with-playwright"
+
+  depends_on "python@3.10"
+
+  if build.with?("playwright")
+    depends_on "node"
+    depends_on "yasyf/do/playwright"
+  end
 
   resource "certifi" do
     url "https://files.pythonhosted.org/packages/37/f7/2b1b0ec44fdc30a3d31dfebe52226be9ddc40cd6c0f34ffc8923ba423b69/certifi-2022.12.7.tar.gz"
@@ -78,11 +86,6 @@ class Do < Formula
     sha256 "0cbc1dbdf5dddb4d67ebc851b9cfb265bf62fe317b043bd37ee5a4a2659421f2"
   end
 
-  resource "playwright" do
-    url "https://files.pythonhosted.org/packages/94/e0/55d941f524612cf1923368163ffa786be5f1a0f90d89b02f7fa35e3af3b6/playwright-1.29.0-py3-none-macosx_11_0_universal2.whl"
-    sha256 "84ae9f999d57463d6450fd4fb3e9e70695fb2b87c4ca76f4459f054ab6fa6583"
-  end
-
   resource "py" do
     url "https://files.pythonhosted.org/packages/98/ff/fec109ceb715d2a6b4c4a85a61af3b40c723a961e8828319fbcb15b868dc/py-1.11.0.tar.gz"
     sha256 "51c75c4126074b472f746a24399ad32f6053d1b34b68d2fa41e558e6f4a98719"
@@ -149,12 +152,30 @@ class Do < Formula
   end
 
   def install
-    virtualenv_create(libexec, "python3.9")
-    virtualenv_install_with_resources
+    ENV["BLAS"] = "None"
+    ENV["LAPACK"] = "None"
+    ENV["ATLAS"] = "None"
+
+    venv = virtualenv_create(libexec, "python3.10")
+    root = venv.instance_variable_get(:@venv_root)
+    system "python3.10", "-m", "venv", "--upgrade", "--upgrade-deps", root
+    system root/"bin"/"pip", "install", "-U", "wheel", "packaging"
+
+    venv.pip_install resources.filter { |r| r.url.include? "pythonhosted" }
+    venv.pip_install_and_link buildpath
+  end
+
+  def caveats
+    <<~EOS
+      If you're using `bash` or `zsh`, `do` is a reserved keyword.
+      We've aliased `ddo` to `do` for your convenience.
+
+      Usage: `ddo revert my last commit`
+    EOS
   end
 
   test do
-    assert_match "REQUEST", shell_output("#{bin}/do")
-    assert_match "REQUEST", shell_output("#{bin}/ddo")
+    shell_output("#{bin}/do", 2)
+    shell_output("#{bin}/ddo", 2)
   end
 end
