@@ -159,7 +159,7 @@ class Do < Formula
   def install
     venv = virtualenv_create(libexec, "python3.9")
     root = venv.instance_variable_get(:@venv_root)
-    system root/"bin"/"python", "-m", "venv", "--upgrade-deps", root
+    system "python3.9", "-m", "venv", "--upgrade-deps", root
     system root/"bin"/"pip", "install", "-U", "wheel", "packaging"
 
     venv.pip_install resources.filter { |r| r.url.include? "pythonhosted" }
