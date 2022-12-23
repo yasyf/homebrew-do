@@ -21,6 +21,18 @@ class Do < Formula
     depends_on "yasyf/do/playwright"
   end
 
+  on_macos do
+    resource "packaging" do
+      url "https://files.pythonhosted.org/packages/6b/f7/c240d7654ddd2d2f3f328d8468d4f1f876865f6b9038b146bec0a6737c65/packaging-22.0.tar.gz?first"
+      sha256 "2198ec20bd4c017b8f9717e00f0c8714076fc2fd93816750ab48e2c41de2cfd3"
+    end
+
+    resource "wheel" do
+      url "https://files.pythonhosted.org/packages/a2/b8/6a06ff0f13a00fc3c3e7d222a995526cbca26c1ad107691b6b1badbbabf1/wheel-0.38.4.tar.gz?first"
+      sha256 "965f5259b566725405b05e7cf774052044b1ed30119b5d586b2703aafe8719ac"
+    end
+  end
+
   resource "certifi" do
     url "https://files.pythonhosted.org/packages/37/f7/2b1b0ec44fdc30a3d31dfebe52226be9ddc40cd6c0f34ffc8923ba423b69/certifi-2022.12.7.tar.gz"
     sha256 "35824b4c3a97115964b408844d64aa14db1cc518f6562e8d7261699d1350a9e3"
@@ -156,17 +168,11 @@ class Do < Formula
     sha256 "c083dd0dce68dbfbe1129d5271cb90f9447dea7d52097c6e0126120c521ddea8"
   end
 
-
-  on_macos do
-    resource "packaging" do
-      url "https://files.pythonhosted.org/packages/6b/f7/c240d7654ddd2d2f3f328d8468d4f1f876865f6b9038b146bec0a6737c65/packaging-22.0.tar.gz?first"
-      sha256 "2198ec20bd4c017b8f9717e00f0c8714076fc2fd93816750ab48e2c41de2cfd3"
-    end
-
-    resource "wheel" do
-      url "https://files.pythonhosted.org/packages/a2/b8/6a06ff0f13a00fc3c3e7d222a995526cbca26c1ad107691b6b1badbbabf1/wheel-0.38.4.tar.gz?first"
-      sha256 "965f5259b566725405b05e7cf774052044b1ed30119b5d586b2703aafe8719ac"
-    end
+  def install
+    venv = virtualenv_create(libexec, "python3.9")
+    venv.pip_install resources.filter { |r| r.url.include? == "first" }
+    venv.pip_install resources.filter { |r| r.url.include? "pythonhosted" }
+    venv.pip_install_and_link buildpath
   end
 
   def caveats
@@ -176,13 +182,6 @@ class Do < Formula
 
       Usage: `ddo revert my last commit`
     EOS
-  end
-
-  def install
-    venv = virtualenv_create(libexec, "python3.9")
-    venv.pip_install resources.filter { |r| r.url.include? == "first" }
-    venv.pip_install resources.filter { |r| r.url.include? "pythonhosted" }
-    venv.pip_install_and_link buildpath
   end
 
   test do
