@@ -7,6 +7,13 @@ class Do < Formula
   sha256 "9cefe8b2b8b92cdb29869e393cb58e404206957c09e95e20d99cf840972744d9"
   license "MIT"
 
+  bottle do
+    root_url "https://github.com/yasyf/homebrew-do/releases/download/do-0.1.14"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, monterey:     "9ddc0b4fdcfd16a2635ec1281189e31b8d9c04c20b1c0d8b4fc6193c3ceddc36"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "bb43474413e041c20280ff2a57116a1e5064e922d4df04fe4b430359e31541b4"
+  end
+
   option "with-playwright"
 
   depends_on "python@3.10"
