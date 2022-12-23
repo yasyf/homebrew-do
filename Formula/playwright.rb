@@ -7,6 +7,11 @@ class Playwright < Formula
   sha256 "db072864b9d7722c617c74410f56e57fbdaeb010dd8023e84a3e4a75cf7d07db"
   license "Apache-2.0"
 
+  livecheck do
+    strategy :npm
+    url :stable
+  end
+
   depends_on "node"
 
   def install
