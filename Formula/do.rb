@@ -7,11 +7,6 @@ class Do < Formula
   sha256 "9cefe8b2b8b92cdb29869e393cb58e404206957c09e95e20d99cf840972744d9"
   license "MIT"
 
-  livecheck do
-    strategy :pypi
-    url :stable
-  end
-
   option "with-playwright"
 
   depends_on "python@3.10"
