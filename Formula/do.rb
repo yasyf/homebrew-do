@@ -21,6 +21,11 @@ class Do < Formula
   if build.with?("playwright")
     depends_on "node"
     depends_on "yasyf/do/playwright"
+
+    resource "playwright" do
+      url "https://github.com/microsoft/playwright-python/archive/refs/tags/v1.29.0.tar.gz"
+      sha256 "f4c5d82d9b7c35435fa840dee15f1c4528bfaf0bdffb796a65d6071747c99f7b"
+    end
   end
 
   resource "certifi" do
@@ -91,11 +96,6 @@ class Do < Formula
   resource "pandas-stubs" do
     url "https://files.pythonhosted.org/packages/47/ec/0a87a213c36f23861c5a2a045ba6014518d7501dc09dc69dc04ff7b6b737/pandas_stubs-1.5.2.221213.tar.gz"
     sha256 "0cbc1dbdf5dddb4d67ebc851b9cfb265bf62fe317b043bd37ee5a4a2659421f2"
-  end
-
-  resource "playwright" do
-    url "https://github.com/microsoft/playwright-python/archive/refs/tags/v1.29.0.tar.gz"
-    sha256 "f4c5d82d9b7c35435fa840dee15f1c4528bfaf0bdffb796a65d6071747c99f7b"
   end
 
   resource "py" do
