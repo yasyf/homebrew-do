@@ -9,9 +9,9 @@ class Do < Formula
 
   bottle do
     root_url "https://github.com/yasyf/homebrew-do/releases/download/do-0.1.15"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "00a8a9a751624b5b7c48996b0cc6c41d12abae3d001303c11c0a212df2b76d18"
-    sha256 cellar: :any_skip_relocation, monterey:      "bf3804347624b6bf2c4dddae30d2b009de6adbd32eacf9991e790c29599f23ce"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "321d736af5e8abbc4152a22f3dcadd63d0e937eb8c162d1d6d29856fcd146a63"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, monterey:     "89873675913b33e250f8cbd307913530ac37b2a5f8081b5861ff83be7676102f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "a242535d48073b34983d68f8946f017222b39bd80155eaa0ec7a6ef53228d266"
   end
 
   option "with-playwright"
