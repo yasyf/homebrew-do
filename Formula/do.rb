@@ -93,6 +93,11 @@ class Do < Formula
     sha256 "0cbc1dbdf5dddb4d67ebc851b9cfb265bf62fe317b043bd37ee5a4a2659421f2"
   end
 
+  resource "playwright" do
+    url "https://github.com/microsoft/playwright-python/archive/refs/tags/v1.29.0.tar.gz"
+    sha256 "f4c5d82d9b7c35435fa840dee15f1c4528bfaf0bdffb796a65d6071747c99f7b"
+  end
+
   resource "py" do
     url "https://files.pythonhosted.org/packages/98/ff/fec109ceb715d2a6b4c4a85a61af3b40c723a961e8828319fbcb15b868dc/py-1.11.0.tar.gz"
     sha256 "51c75c4126074b472f746a24399ad32f6053d1b34b68d2fa41e558e6f4a98719"
@@ -168,7 +173,7 @@ class Do < Formula
     system "python3.10", "-m", "venv", "--upgrade", "--upgrade-deps", root
     system root/"bin"/"pip", "install", "-U", "wheel", "packaging"
 
-    venv.pip_install resources.filter { |r| r.url.include? "pythonhosted" }
+    venv.pip_install resources
     venv.pip_install_and_link buildpath
   end
 
