@@ -3,8 +3,8 @@ class Do < Formula
 
   desc "AI-Powered Shell (GPT3)"
   homepage "https://github.com/yasyf/gpt-do"
-  url "https://files.pythonhosted.org/packages/2f/21/b5f25fd2992314d79a722647a83b721bb98fc46443429bf2a7916a334412/gpt_do-0.1.15.tar.gz"
-  sha256 "ef36c98d9682b2098ef65bd4f69b3d546f026557cc7ec855ee125ae14daa8e80"
+  url "https://files.pythonhosted.org/packages/f7/db/4ad300d9d405017d7eab313ac18a563d52a84dd59d9c075e63d4cee8eff0/gpt_do-0.1.16.tar.gz"
+  sha256 "4e8c6b563fdcff67b048ae9a233500fcff870c9d547df86c9afc1966cda2f751"
   license "MIT"
 
   bottle do
@@ -75,8 +75,8 @@ class Do < Formula
   end
 
   resource "numpy" do
-    url "https://files.pythonhosted.org/packages/5f/c7/5ca7c100dcc85b5ef1b176bdf87be5e4392c2c3018e13cc7cdef828c6a09/numpy-1.24.0.tar.gz"
-    sha256 "c4ab7c9711fe6b235e86487ca74c1b092a6dd59a3cb45b63241ea0a148501853"
+    url "https://files.pythonhosted.org/packages/ce/b8/c170db50ec49d5845bd771bc5549fe734ee73083c5c52791915f95d8e2bc/numpy-1.24.1.tar.gz"
+    sha256 "2386da9a471cc00a1f47845e27d916d5ec5346ae9696e01a8a34760858fe9dd2"
   end
 
   resource "openai" do
@@ -102,6 +102,11 @@ class Do < Formula
   resource "py" do
     url "https://files.pythonhosted.org/packages/98/ff/fec109ceb715d2a6b4c4a85a61af3b40c723a961e8828319fbcb15b868dc/py-1.11.0.tar.gz"
     sha256 "51c75c4126074b472f746a24399ad32f6053d1b34b68d2fa41e558e6f4a98719"
+  end
+
+  resource "py-getch" do
+    url "https://files.pythonhosted.org/packages/ed/ef/51cb247eb54a40ef1808dc3b1c7ed2630626266f31f6d5a976cd0696b554/py-getch-1.0.1.zip"
+    sha256 "1b703d6b049c606df64c7ea76a137888c2e3e800ba5c220bac18804d3a1ed1bd"
   end
 
   resource "pyee" do
