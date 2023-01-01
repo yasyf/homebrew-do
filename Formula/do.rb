@@ -8,11 +8,9 @@ class Do < Formula
   license "MIT"
 
   bottle do
-    root_url "https://github.com/yasyf/homebrew-do/releases/download/do-0.1.15"
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "f1ae7f91ab257392a457079be09e9b50e6db2aeee30cdeedfc0c3583c4b87c40"
-    sha256 cellar: :any_skip_relocation, monterey:      "89873675913b33e250f8cbd307913530ac37b2a5f8081b5861ff83be7676102f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a242535d48073b34983d68f8946f017222b39bd80155eaa0ec7a6ef53228d266"
+    root_url "https://github.com/yasyf/homebrew-do/releases/download/do-0.1.16"
+    sha256 cellar: :any_skip_relocation, monterey:     "fe76e0cfd20449a45e2092716a193e65344fd8912764c7a000f63a834dcffd52"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "4fb7330f6106cbb91a615127b08b093c99b56da148d55f77f6a5301347b5bd16"
   end
 
   option "with-playwright"
